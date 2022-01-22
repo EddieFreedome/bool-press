@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts
+        $posts = Post::all();
+        return view('Admin.posts.index', compact('posts'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.posts.create');
     }
 
     /**
@@ -35,7 +37,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $post = new Post;
+        $post->title = $data['title'];
+        $post->content = $data['content'];
+        $post->save();
+                            //Dove devo andare?
+        //return redirect('posts');
+        return redirect()->route("Admin.posts.show", $post->id);
+
     }
 
     /**
@@ -44,9 +55,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('Admin.posts.show', compact('post'));
     }
 
     /**
@@ -55,9 +66,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view("Admin.posts.edit", compact('post'));
     }
 
     /**

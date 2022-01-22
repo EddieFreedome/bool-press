@@ -28,6 +28,6 @@ Route::middleware('auth')//proteggono le rotte tramite autenticazione
     ->group(function (){
         Route::get('/', 'HomeController@index')
         ->name('home');
-        Route::resource('post','PostController');
+        Route::resource('posts','PostController');
     });
 
