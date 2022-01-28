@@ -6,12 +6,15 @@
     <a href="{{ route('admin.posts.create') }}">Crea post</a>
 </div>
 
-<form action="{{ route('Admin.posts.destroy', ['id' => $user->id]) }}"
-    method="POST">
-    @csrf
-    @method('DELETE')
+@foreach($posts as $post)
+    <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}"
+        method="POST">
+        @csrf
+        @method('DELETE')
 
-    <input type="submit" value="Cancella Post">
-</form>
+        <input type="submit" value="Cancella Post">
+    </form>
+
+@endforeach
 
 @endsection
