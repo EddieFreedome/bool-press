@@ -45,7 +45,7 @@ class PostController extends Controller
         $post->save();
                             //Dove devo andare?
         //return redirect('posts');
-        return redirect()->route("Admin.posts.show", $post->id);
+        return redirect()->route("Admin.posts.index", $post->id);
 
     }
 
@@ -82,7 +82,7 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        $post->update($data);
+        
 
         return redirect()->route('Admin.posts.show');
     }
